@@ -75,3 +75,97 @@
 // =============================================================================
 
 
+
+
+const readlineSync = require('readline-sync');
+
+function add(a, b) {
+  return a + b;
+}
+
+function subtract(a, b) {
+  return a - b;
+}
+
+function multiply(a, b) {
+  return a * b;
+}
+
+function divide(a, b) {
+  if (b === 0) {
+    return null;
+  }
+  return a / b;
+}
+
+function modulus(a, b) {
+  if (b === 0) {
+    return null;
+  }
+  return a % b;
+}
+
+function exponent(a, b) {
+  return a ** b;
+}
+
+function getTwoNumbers() {
+  let a = parseFloat(readlineSync.question("Enter first number : "));
+  let b = parseFloat(readlineSync.question("Enter second number: "));
+  return [a, b];
+}
+
+function showMenu() {
+  console.log("\n============================");
+  console.log("     SIMPLE CALCULATOR");
+  console.log("============================");
+  console.log("1. Addition");
+  console.log("2. Subtraction");
+  console.log("3. Multiplication");
+  console.log("4. Division");
+  console.log("5. Modulus");
+  console.log("6. Exponentiation");
+  console.log("7. Quit");
+}
+
+let running = true;
+
+while (running) {
+  showMenu();
+  let choice = readlineSync.question("Select an operation (1-7): ");
+
+  if (choice === "1") {
+    let [a, b] = getTwoNumbers();
+    console.log(`Result: ${a} + ${b} = ${add(a, b).toFixed(2)}`);
+  } else if (choice === "2") {
+    let [a, b] = getTwoNumbers();
+    console.log(`Result: ${a} - ${b} = ${subtract(a, b).toFixed(2)}`);
+  } else if (choice === "3") {
+    let [a, b] = getTwoNumbers();
+    console.log(`Result: ${a} * ${b} = ${multiply(a, b).toFixed(2)}`);
+  } else if (choice === "4") {
+    let [a, b] = getTwoNumbers();
+    let result = divide(a, b);
+    if (result === null) {
+      console.log("Error: Cannot divide by zero.");
+    } else {
+      console.log(`Result: ${a} / ${b} = ${result.toFixed(2)}`);
+    }
+  } else if (choice === "5") {
+    let [a, b] = getTwoNumbers();
+    let result = modulus(a, b);
+    if (result === null) {
+      console.log("Error: Cannot divide by zero.");
+    } else {
+      console.log(`Result: ${a} % ${b} = ${result.toFixed(2)}`);
+    }
+  } else if (choice === "6") {
+    let [a, b] = getTwoNumbers();
+    console.log(`Result: ${a} ** ${b} = ${exponent(a, b).toFixed(2)}`);
+  } else if (choice === "7") {
+    console.log("Goodbye!");
+    running = false;
+  } else {
+    console.log("Error: please enter a valid choice (1-7).");
+  }
+}
